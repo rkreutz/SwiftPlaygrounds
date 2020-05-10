@@ -2,6 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ErrorHandling.playground">
+   </FileRef>
+   <FileRef
+      location = "group:Identifiers.playground">
+   </FileRef>
+   <FileRef
+      location = "group:MemoryManagement.playground">
+   </FileRef>
+   <FileRef
       location = "container:RxSwift.playground">
    </FileRef>
    <FileRef
