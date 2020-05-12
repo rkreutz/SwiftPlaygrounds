@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/teamwork/SwiftPlaygrounds/Clamping.playground">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/teamwork/SwiftPlaygrounds/Dates.playground">
+   </FileRef>
+   <FileRef
       location = "group:ErrorHandling.playground">
    </FileRef>
    <FileRef
