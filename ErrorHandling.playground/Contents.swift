@@ -78,3 +78,56 @@ SomeError.mightBeLocalized(nil).localizedDescription
 Something.Error.something.localizedDescription
 
 String(reflecting: Something.Error.self)
+
+protocol TableLocalizedError: LocalizedError {
+
+    var bundle: Bundle { get }
+    var table: String { get }
+}
+
+extension LocalizedError {
+
+    var errorDescription: String? {
+
+        let mirror = Mirror(reflecting: self)
+
+        switch mirror.children.first {
+
+            case .none:
+                return "\(String(reflecting: type(of: self))).\(String(describing: self))"
+
+            case let .some(.some(label), value as CustomStringConvertible):
+                return String(format: "\(String(reflecting: type(of: self))).\(label) -> %@", value.description)
+
+            case let .some(.some(label), value as Error):
+                return String(format: "\(String(reflecting: type(of: self))).\(label) -> %@", value.localizedDescription)
+
+            case let .some(.some(label), _):
+                return "\(String(reflecting: type(of: self))).\(label)"
+
+            default:
+                return nil
+        }
+    }
+}
+
+enum MyError: LocalizedError {
+
+    case some
+
+//    var errorDescription: String? {
+//
+//        return "error"
+//    }
+}
+
+let localizedError: LocalizedError = MyError.some
+localizedError.localizedDescription
+
+enum SomeCases: LocalizedError {
+
+    case something(Error)
+    case none
+}
+
+SomeCases.something(SomeCases.none).localizedDescription
